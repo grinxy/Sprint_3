@@ -1,43 +1,23 @@
 <?php declare(strict_types=1);
 require_once "carCouponGenerator.php";
-class mercedesCuoponGenerator implements carCouponGenerator
+class mercedesCouponGenerator implements carCouponGenerator
 {
-    private float $discount;
-    private bool $isHighSeason;
-    private bool $bigStock;
-    
-    public function __construct(bool $isHighSeason, bool $bigStock){
-        $this->discount = 0;
-        $this->isHighSeason = $isHighSeason;
-        $this->bigStock = $bigStock;
-    }
-
-    public function couponGenerator(): string
+    public function addSeasonDiscount(bool $isHighSeason): int
     {
-
-        $this->addStockDiscount();
-        $this->addSeasonDiscount();
-        $coupon = "Get {$this->discount}% off the price of your new car.";
-        ;
-
-        return $coupon;
-    }
-    public function addSeasonDiscount(): float
-    {
-        if (!$this->isHighSeason) {
-            $this->discount += 4;
+        if ($isHighSeason) {
+            return 4;
+        } else {
+            return 0;
         }
-        return $this->discount;
-
     }
-    public function addStockDiscount(): float
+    public function addStockDiscount(bool $isBigStock): int
     {
-        if ($this->bigStock) {
-            $this->discount += 10;
-            
-        }
-        return $this->discount;
+        if ($isBigStock) {
+            return 10;
 
+        } else {
+            return 0;
+        }
     }
 }
 

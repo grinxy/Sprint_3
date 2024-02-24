@@ -2,6 +2,8 @@
 
 interface carCouponGenerator{
 
-    public function couponGenerator();
+    public function addStockDiscount(bool $isHighSeason);
+    public function addSeasonDiscount(bool $isBigStock);
+
 
 }

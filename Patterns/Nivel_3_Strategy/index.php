@@ -2,12 +2,24 @@
 require_once "bmwCouponGenerator.php";
 require_once "mercedesCouponGenerator.php";
 
-$carCoupon1 = new bmwCuoponGenerator(true, true);
-$carCoupon2 = new mercedesCuoponGenerator(true, true);
-$carCoupon3 = new bmwCuoponGenerator(true, false);
-$carCoupon4 = new mercedesCuoponGenerator(false, true);
 
-echo $carCoupon1->couponGenerator() . PHP_EOL;
-echo $carCoupon2->couponGenerator() . PHP_EOL;
-echo $carCoupon3->couponGenerator() . PHP_EOL;
-echo $carCoupon4->couponGenerator() . PHP_EOL;
+
+echo cupounGenerator("bmw");
+function cupounGenerator($car) : string {
+
+    $discount = 0;
+    $isHighSeason = false;
+    $isBigStock = true;
+
+    if($car == "bmw"){
+       $newCouponGenerator = new bmwCouponGenerator();
+    } else if($car == "mercedes") {
+       $newCouponGenerator = new mercedesCouponGenerator();
+    
+    }
+    $discount = $newCouponGenerator->addSeasonDiscount($isHighSeason) + $newCouponGenerator->addStockDiscount($isBigStock);
+   
+    return $cupoun = "Get {$discount}% off the price of your new car.";
+}
+
+?>
